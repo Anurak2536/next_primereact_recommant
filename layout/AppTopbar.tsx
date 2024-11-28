@@ -10,6 +10,8 @@ import { MenuItem } from 'primereact/menuitem';
 import { InputText } from 'primereact/inputtext';
 import { Avatar } from 'primereact/avatar';
 import { Badge } from 'primereact/badge';
+import { MenuProvider } from './context/menucontext';
+import AppMenuitem from './AppMenuitem';
 
 const AppTopbar = forwardRef<AppTopbarRef>((props, ref) => {
     const { layoutConfig, layoutState, onMenuToggle, showProfileSidebar } = useContext(LayoutContext);
@@ -23,97 +25,50 @@ const AppTopbar = forwardRef<AppTopbarRef>((props, ref) => {
         topbarmenubutton: topbarmenubuttonRef.current
     }));
 
-    const itemRenderer = (item: any) => (
-        <a className="flex align-items-center p-menuitem-link">
-            <span className={item.icon} />
-            <span className="mx-2">{item.label}</span>
-            {item.badge && <Badge className="ml-auto" value={item.badge} />}
-            {item.shortcut && <span className="ml-auto border-1 surface-border border-round surface-100 text-xs p-1">{item.shortcut}</span>}
-        </a>
-    );
-
     interface ExMenuItem extends MenuItem {
         label?: string;
         items?: any;
         badge?: number;
+        shortcut?: string;
+        link?: any;
     }
+
+    const itemRenderer = (item: ExMenuItem) => (
+        <Link href={item.link} style={{ cursor: 'pointer' }}>
+            <span className={item.icon} />
+            <span className="mx-2">{item.label}</span>
+            {item.badge && <Badge className="ml-auto" value={item.badge} />}
+            {item.shortcut && <span className="ml-auto border-1 surface-border border-round surface-100 text-xs p-1">{item.shortcut}</span>}
+        </Link>
+    );
 
     const items: ExMenuItem[] = [
         {
-            label: 'Home',
-            icon: 'pi pi-home'
+            label: 'แจ้งปัญหาและข้อเสนอแนะ',
+            icon: 'pi pi-bell',
+            url: '/recommant/'
         },
         {
-            label: 'Features',
-            icon: 'pi pi-star'
+            label: 'รายงานคิวการปรับปรุงระบบ',
+            icon: 'pi pi-list',
+            url: '/recommant/uikit/panel'
         },
-        {
-            label: 'Projects',
-            icon: 'pi pi-search',
-            items: [
-                {
-                    label: 'Core',
-                    icon: 'pi pi-bolt',
-                    shortcut: '⌘+S',
-                    template: itemRenderer
-                },
-                {
-                    label: 'Blocks',
-                    icon: 'pi pi-server',
-                    shortcut: '⌘+B',
-                    template: itemRenderer
-                },
-                {
-                    label: 'UI Kit',
-                    icon: 'pi pi-pencil',
-                    shortcut: '⌘+U',
-                    template: itemRenderer
-                },
-                {
-                    separator: true
-                },
-                {
-                    label: 'Templates',
-                    icon: 'pi pi-palette',
-                    items: [
-                        {
-                            label: 'Apollo',
-                            icon: 'pi pi-palette',
-                            badge: 2,
-                            template: itemRenderer
-                        },
-                        {
-                            label: 'Ultima',
-                            icon: 'pi pi-palette',
-                            badge: 3,
-                            template: itemRenderer
-                        }
-                    ]
-                }
-            ]
-        },
-        {
-            label: 'Contact',
-            icon: 'pi pi-envelope',
-            badge: 3,
-            template: itemRenderer
-        }
     ];
 
     const start = (
         <span className="inline-flex align-items-center gap-1 pl-2 pr-4">
-            <img alt="logo" src={`/stdplan/layout/images/books.png`} height="40" className="mr-2"></img>
+            <img alt="logo" src={`/recommant/layout/images/LogoRecommants.png`} height="40" className="mr-2"></img>
             <span className="font-medium text-xl font-semibold appname">
-            <span>ระบบแผนหลักสูตร</span>&nbsp;<span className="text-primary">แผนรับนิสิต</span>
+            <span>แจ้งปัญหาและข้อเสนอแนะ</span>&nbsp;<span className="text-primary">ระบบสารสนเทศ</span>
             </span>
         </span>
     );
     const end = (
         <div className="flex align-items-center gap-2">
             <button className='w-full p-link flex align-items-center p-1 pl-4 text-color border-noround'>
-                <Avatar image="https://primefaces.org/cdn/primereact/images/avatar/amyelsner.png" size="large" className="mr-2" shape="circle" />
+                {/* <Avatar image="https://primefaces.org/cdn/primereact/images/avatar/amyelsner.png" size="large" className="mr-2" shape="circle" /> */}
                 <div className="flex flex-column align">
-                    <span className="font-bold">Akkharin Bubpa</span>
+                    <span className="font-bold">By Admin System</span>
                     <span className="text-sm">Admin</span>
                 </div>
             </button>
@@ -121,7 +76,7 @@ const AppTopbar = forwardRef<AppTopbarRef>((props, ref) => {
     );
 
     return (
-        <div className="layout-topbar">
+        <div className="layout-menu">
             <Menubar model={items} start={start} end={end} style={{backgroundColor:"var(--surface-card)"}} />
         </div>
     );

@@ -8,9 +8,10 @@ const AppFooter = () => {
 
     return (
         <div className="layout-footer">
-            <img src={`/stdplan/layout/images/logo-${layoutConfig.colorScheme === 'light' ? 'dark' : 'white'}.svg`} alt="Logo" height="20" className="mr-2" />
-            by
-            <span className="font-medium ml-2">PrimeReact</span>
+            {/* <img src={`/recommant/layout/images/logo-${layoutConfig.colorScheme === 'light' ? 'dark' : 'white'}.svg`} alt="Logo" height="20" className="mr-2" /> */}
+            <img src={`/recommant/layout/images/LogoRecommants.png`} alt="Logo" height="20" className="mr-2" />
+            @2024 by
+            <span className="font-medium ml-2">ERP MSU</span>
         </div>
     );
 };

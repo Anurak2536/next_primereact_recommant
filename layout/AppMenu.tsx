@@ -179,7 +179,7 @@ const AppMenu = () => {
                 })}
 
                 <Link href="https://blocks.primereact.org" target="_blank" style={{ cursor: 'pointer' }}>
-                    <img alt="Prime Blocks" className="w-full mt-3" src={`/stdplan/layout/images/banner-primeblocks${layoutConfig.colorScheme === 'light' ? '' : '-dark'}.png`} />
+                    <img alt="Prime Blocks" className="w-full mt-3" src={`/recommant/layout/images/banner-primeblocks${layoutConfig.colorScheme === 'light' ? '' : '-dark'}.png`} />
                 </Link>
             </ul>
         </MenuProvider>

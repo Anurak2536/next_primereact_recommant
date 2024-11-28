@@ -125,10 +125,10 @@ const Layout = ({ children }: ChildContainerProps) => {
     return (
         <React.Fragment>
             <div className={containerClass}>
-                <AppTopbar ref={topbarRef} />
-                {/* <div ref={sidebarRef} className="layout-sidebar">
+                {/* <AppTopbar ref={topbarRef} /> */}
+                <div ref={sidebarRef} className="layout-sidebar">
                     <AppSidebar />
-                </div> */}
+                </div>
                 <div className="layout-main-container">
                     <div className="layout-main">{children}</div>
                     <AppFooter />
